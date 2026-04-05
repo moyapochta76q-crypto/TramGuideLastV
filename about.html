@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>О проекте TramGuide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Информация о проекте TramGuide — открытая энциклопедия трамвайных систем и подвижного состава.">
+  <meta name="keywords" content="TramGuide, о проекте, энциклопедия, трамвай">
+  <meta name="author" content="TramGuide">
+  <meta name="copyright" content="TramGuide 2026">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="О проекте TramGuide">
+  <meta property="og:description" content="Цели, структура и планы развития энциклопедии трамвайных систем TramGuide.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="about">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="На главную TramGuide">
+        <span class="logo-icon">🚋</span>
+        <span class="logo-text">TramGuide</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Переключить меню" aria-expanded="false" aria-controls="main-nav">
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Главная</a></li>
+          <li><a href="systems.html" class="nav-link">Трамвайные системы</a></li>
+          <li><a href="vehicles.html" class="nav-link">Вагоны</a></li>
+          <li><a href="about.html" class="nav-link nav-link--active">О проекте</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <section class="section">
+      <div class="container container-narrow">
+        <header class="section-header">
+          <h1 class="section-title">О проекте TramGuide</h1>
+        </header>
+
+        <article class="rich-text">
+          <p>
+            <strong>TramGuide</strong> — это некоммерческий энциклопедический проект,
+            посвящённый трамвайным системам мира и подвижному составу.
+            Цель проекта — собрать в одном месте структурированную, проверенную и
+            удобную для навигации информацию о городском трамвайном транспорте.
+          </p>
+
+          <h2>Что уже реализовано</h2>
+          <ul>
+            <li>Каталог трамвайных систем с основными характеристиками;</li>
+            <li>Карточки моделей трамвайных вагонов с техническими данными;</li>
+            <li>Интерактивная карта с выделением стран, где есть трамвайные системы;</li>
+            <li>Фильтрация по странам, городам, производителям и типам вагонов;</li>
+            <li>Адаптивный интерфейс для мобильных устройств, планшетов и десктопов.</li>
+          </ul>
+
+          <h2>Технологии</h2>
+          <p>
+            Сайт работает как статический проект на GitHub Pages и использует:
+          </p>
+          <ul>
+            <li>HTML5 и семантическую вёрстку;</li>
+            <li>CSS3 с использованием переменных и адаптивной сетки;</li>
+            <li>Vanilla JavaScript без тяжёлых фреймворков;</li>
+            <li>JSON-файлы для хранения данных о системах и подвижном составе;</li>
+            <li>SVG для интерактивной карты мира;</li>
+            <li>SimpleLightbox для удобного просмотра фотографий.</li>
+          </ul>
+
+          <h2>Принципы проекта</h2>
+          <ul>
+            <li><strong>Открытость данных.</strong> Структура данных в JSON максимально проста и пригодна для расширения.</li>
+            <li><strong>Доступность.</strong> Сайт учитывает базовые требования WCAG: читаемые шрифты, контраст, ARIA-атрибуты.</li>
+            <li><strong>Производительность.</strong> Используется отложенная загрузка изображений и кеширование данных в <code>localStorage</code>.</li>
+            <li><strong>Модульность.</strong> Логика разделена по модулям: навигация, карта, фильтры, загрузка данных.</li>
+          </ul>
+
+          <h2>Как помочь проекту</h2>
+          <p>
+            Вы можете помочь развитию TramGuide, предложив:
+          </p>
+          <ul>
+            <li>исправления и дополнения в данных о системах и вагонах;</li>
+            <li>фотографии трамваев (с указанием авторства и лицензии);</li>
+            <li>переводы описаний на другие языки;</li>
+            <li>улучшения интерфейса и кода.</li>
+          </ul>
+          <p>
+            Для предложений и обратной связи пишите на:
+            <a href="mailto:info@tramguide.example">info@tramguide.example</a>.
+          </p>
+
+          <h2>Планы на будущее</h2>
+          <p>
+            В перспективе планируется:
+          </p>
+          <ul>
+            <li>подключение системы комментариев (например, Giscus на базе GitHub);</li>
+            <li>использование GitHub Discussions как форума сообщества;</li>
+            <li>создание Telegram-чата для оперативного общения;</li>
+            <li>разработка простой админ-панели для добавления и редактирования контента.</li>
+          </ul>
+          <p>
+            Эти функции пока не реализованы намеренно, чтобы сохранить простоту архитектуры
+            и облегчить развёртывание на GitHub Pages.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-main">
+        <p class="footer-brand">
+          <span class="logo-icon">🚋</span>
+          <span class="logo-text">TramGuide</span>
+        </p>
+        <p class="footer-copy">
+          © <span class="js-current-year">2026</span> TramGuide. Все права защищены.
+        </p>
+      </div>
+      <div class="footer-links">
+        <nav aria-label="Ссылки подвала">
+          <a href="about.html" class="footer-link">О проекте</a>
+          <a href="systems.html" class="footer-link">Системы</a>
+          <a href="vehicles.html" class="footer-link">Вагоны</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/map.js" defer></script>
+  <script src="js/filters.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
