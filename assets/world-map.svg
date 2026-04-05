@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1000 500"
+  role="img"
+  aria-labelledby="title desc">
+  <title id="title">Упрощённая карта мира</title>
+  <desc id="desc">Схематичная карта с выделением некоторых стран для примера работы интерактивной карты.</desc>
+
+  <style><![CDATA[
+    .country {
+      fill: #f5e8d5;
+      stroke: #c7b9a0;
+      stroke-width: 1;
+      cursor: pointer;
+      transition: fill 0.2s ease-out, stroke 0.2s ease-out;
+    }
+    .country:hover {
+      fill: #ffd54f;
+      stroke: #aa8f4f;
+    }
+    .country.has-trams {
+      fill: #ffe08a;
+    }
+    .country.active {
+      fill: #ffb300;
+      stroke: #c92a2a;
+      stroke-width: 1.5;
+    }
+  ]]></style>
+
+  <!-- Лёгкая подложка континентов для ориентира -->
+  <path
+    d="M40 80h920v260H40z"
+    fill="#efe2cf"
+    opacity="0.4"
+    stroke="#decbb2"
+    stroke-width="1" />
+
+  <!-- Россия (очень условный прямоугольник) -->
+  <path
+    class="country"
+    id="country-russia"
+    data-country="Россия"
+    d="M420 90h320v120H420z" />
+
+  <!-- Германия -->
+  <path
+    class="country"
+    id="country-germany"
+    data-country="Германия"
+    d="M380 190h70v70h-70z" />
+
+  <!-- Чехия -->
+  <path
+    class="country"
+    id="country-czechia"
+    data-country="Чехия"
+    d="M380 170h70v20h-70z" />
+
+  <!-- Австрия -->
+  <path
+    class="country"
+    id="country-austria"
+    data-country="Австрия"
+    d="M380 260h70v20h-70z" />
+
+  <!-- Узбекистан -->
+  <path
+    class="country"
+    id="country-uzbekistan"
+    data-country="Узбекистан"
+    d="M520 230h120v40H520z" />
+
+  <!-- Несколько «фоновых» стран без атрибута data-country -->
+  <path
+    class="country"
+    d="M260 170h80v80h-80z"
+    opacity="0.5" />
+  <path
+    class="country"
+    d="M680 170h80v80h-80z"
+    opacity="0.5" />
+</svg>
