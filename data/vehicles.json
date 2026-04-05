@@ -1,0 +1,107 @@
+[
+  {
+    "id": "71-623",
+    "model": "71-623",
+    "manufacturer": "УКВЗ",
+    "country": "Россия",
+    "yearsProduced": "2003–2012",
+    "totalProduced": 450,
+    "length": 14.8,
+    "width": 2.5,
+    "sections": 3,
+    "capacity": 140,
+    "seatingCapacity": 26,
+    "floorType": "частично низкопольный",
+    "powerType": "постоянный ток 600 В",
+    "maxSpeed": 65,
+    "photos": [
+      "https://via.placeholder.com/1200x800?text=71-623+1",
+      "https://via.placeholder.com/1200x800?text=71-623+2"
+    ],
+    "operatesIn": ["moscow", "saint-petersburg"]
+  },
+  {
+    "id": "71-931M",
+    "model": "71-931M «Витязь-М»",
+    "manufacturer": "ПК ТРАНСПОРТНЫЕ СИСТЕМЫ",
+    "country": "Россия",
+    "yearsProduced": "2014–настоящее время",
+    "totalProduced": 200,
+    "length": 27.8,
+    "width": 2.5,
+    "sections": 3,
+    "capacity": 260,
+    "seatingCapacity": 60,
+    "floorType": "низкопольный",
+    "powerType": "постоянный ток 550–825 В",
+    "maxSpeed": 75,
+    "photos": [
+      "https://via.placeholder.com/1200x800?text=71-931M+1",
+      "https://via.placeholder.com/1200x800?text=71-931M+2"
+    ],
+    "operatesIn": ["moscow"]
+  },
+  {
+    "id": "tatra-t3",
+    "model": "Tatra T3",
+    "manufacturer": "ČKD Tatra",
+    "country": "Чехословакия",
+    "yearsProduced": "1960–1990",
+    "totalProduced": 13991,
+    "length": 14.0,
+    "width": 2.5,
+    "sections": 1,
+    "capacity": 110,
+    "seatingCapacity": 23,
+    "floorType": "высокопольный",
+    "powerType": "постоянный ток 600 В",
+    "maxSpeed": 65,
+    "photos": [
+      "https://via.placeholder.com/1200x800?text=Tatra+T3+1",
+      "https://via.placeholder.com/1200x800?text=Tatra+T3+2"
+    ],
+    "operatesIn": ["prague", "saint-petersburg", "tashkent"]
+  },
+  {
+    "id": "combino",
+    "model": "Siemens Combino",
+    "manufacturer": "Siemens",
+    "country": "Германия",
+    "yearsProduced": "1996–2007",
+    "totalProduced": 500,
+    "length": 29.0,
+    "width": 2.4,
+    "sections": 5,
+    "capacity": 220,
+    "seatingCapacity": 70,
+    "floorType": "низкопольный",
+    "powerType": "постоянный ток 600–750 В",
+    "maxSpeed": 70,
+    "photos": [
+      "https://via.placeholder.com/1200x800?text=Combino+1",
+      "https://via.placeholder.com/1200x800?text=Combino+2"
+    ],
+    "operatesIn": ["prague", "berlin"]
+  },
+  {
+    "id": "flexity",
+    "model": "Bombardier Flexity",
+    "manufacturer": "Bombardier",
+    "country": "Германия",
+    "yearsProduced": "2006–настоящее время",
+    "totalProduced": 800,
+    "length": 30.0,
+    "width": 2.4,
+    "sections": 7,
+    "capacity": 250,
+    "seatingCapacity": 80,
+    "floorType": "низкопольный",
+    "powerType": "постоянный ток 600–750 В",
+    "maxSpeed": 70,
+    "photos": [
+      "https://via.placeholder.com/1200x800?text=Flexity+1",
+      "https://via.placeholder.com/1200x800?text=Flexity+2"
+    ],
+    "operatesIn": ["berlin", "moscow"]
+  }
+]
