@@ -361,50 +361,49 @@
     }
 
     /**
-     * Пробуем инициализировать сразу (если SVG уже загружен).
+    /**
+     * Пробуем инициализировать сразу.
      */
     function tryImmediateInit() {
-      try {
-        var svgDoc = mapObject.contentDocument;
-        if (svgDoc && svgDoc.documentElement) {
-          setupSvg(svgDoc);
-          return true;
-        }
-      } catch (e) {
-        console.log('Карта: не удалось получить contentDocument', e);
+      // Для встроенного SVG просто ищем элемент по ID
+      var svgRoot = document.getElementById('world-map');
+      if (svgRoot && svgRoot.nodeName.toLowerCase() === 'svg') {
+        // SVG встроен напрямую в HTML
+        setupSvg({ documentElement: svgRoot });
+        return true;
       }
-      return false;
-    }
-
-    // Если не удалось сразу — ждём событие load
-    if (!tryImmediateInit()) {
-      mapObject.addEventListener('load', function () {
+      
+      // Если это <object>, пробуем contentDocument
+      var mapObject = document.getElementById('world-map');
+      if (mapObject && mapObject.nodeName.toLowerCase() === 'object') {
         try {
           var svgDoc = mapObject.contentDocument;
-          if (svgDoc) {
+          if (svgDoc && svgDoc.documentElement) {
             setupSvg(svgDoc);
-          } else if (messageEl) {
-            messageEl.textContent = 'Не удалось прочитать содержимое SVG-карты.';
-            renderAllSystems();
+            return true;
           }
-        } catch (error) {
-          console.log('Карта: ошибка при инициализации', error);
-          if (messageEl) {
-            messageEl.textContent = 'Произошла ошибка при инициализации карты.';
-          }
-          renderAllSystems();
+        } catch (e) {
+          console.log('Карта: не удалось получить contentDocument', e);
         }
-      });
-    }
-
-    // Если SVG совсем не загрузился
-    mapObject.addEventListener('error', function () {
-      if (messageEl) {
-        messageEl.textContent = 'Не удалось загрузить SVG-карту. Список систем доступен ниже.';
       }
-      renderAllSystems();
-    });
-  }
+      
+      return false;
+    }
+    // Если не удалось сразу — ждём событие load
+    
+    // Пробуем инициализировать
+    if (!tryImmediateInit()) {
+      // Если SVG ещё не загрузился, ждём события DOMContentLoaded
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', tryImmediateInit);
+      } else {
+        console.log('Карта: не удалось найти элемент world-map');
+        if (messageEl) {
+          messageEl.textContent = 'Не удалось загрузить карту.';
+        }
+        renderAllSystems();
+      }
+    }    
 
   window.initWorldMap = initWorldMap;
 })();
