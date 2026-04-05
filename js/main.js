@@ -196,6 +196,7 @@
       renderLatest(systems, vehicles);
 
       if (typeof window.initWorldMap === 'function') {
+        // Временно отключено
         window.initWorldMap(systems);
       }
     } catch (error) {
