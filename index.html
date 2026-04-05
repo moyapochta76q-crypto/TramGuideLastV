@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>TramGuide — Энциклопедия трамваев мира</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TramGuide — русскоязычная энциклопедия трамвайных систем мира и подвижного состава. История, характеристики, карты и подвижной состав.">
+  <meta name="keywords" content="трамвай, трамваи, трамвайные системы, подвижной состав, городской транспорт, энциклопедия">
+  <meta name="author" content="TramGuide">
+  <meta name="copyright" content="TramGuide 2026">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TramGuide — Энциклопедия трамваев мира">
+  <meta property="og:description" content="Исследуйте историю и современность трамвайного транспорта по всему миру.">
+  <meta property="og:url" content="https://example.com/tramguide">
+  <meta property="og:locale" content="ru_RU">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="На главную TramGuide">
+        <span class="logo-icon">🚋</span>
+        <span class="logo-text">TramGuide</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Переключить меню" aria-expanded="false" aria-controls="main-nav">
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link nav-link--active">Главная</a></li>
+          <li><a href="systems.html" class="nav-link">Трамвайные системы</a></li>
+          <li><a href="vehicles.html" class="nav-link">Вагоны</a></li>
+          <li><a href="about.html" class="nav-link">О проекте</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <!-- Hero / Banner -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1 class="hero-title">TramGuide — Энциклопедия трамваев мира</h1>
+          <p class="hero-subtitle">
+            Исследуйте историю и современность трамвайного транспорта:
+            системы, маршруты и подвижной состав в разных странах.
+          </p>
+          <div class="hero-actions">
+            <a href="systems.html" class="btn btn-primary">Перейти к системам</a>
+            <a href="vehicles.html" class="btn btn-outline">Посмотреть вагоны</a>
+          </div>
+        </div>
+        <div class="hero-illustration" aria-hidden="true">
+          <div class="hero-tram">
+            <div class="hero-tram-body"></div>
+            <div class="hero-tram-window"></div>
+            <div class="hero-tram-window"></div>
+            <div class="hero-tram-window"></div>
+            <div class="hero-tram-front"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="section section-stats">
+      <div class="container">
+        <h2 class="section-title">Статистика TramGuide</h2>
+        <div class="stats-grid" aria-label="Статистика проекта">
+          <article class="stat-card">
+            <div class="stat-icon" aria-hidden="true">🌍</div>
+            <h3 class="stat-title">Трамвайных систем</h3>
+            <p class="stat-value" id="stat-systems">—</p>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon" aria-hidden="true">🚃</div>
+            <h3 class="stat-title">Моделей вагонов</h3>
+            <p class="stat-value" id="stat-vehicles">—</p>
+          </article>
+          <article class="stat-card">
+            <div class="stat-icon" aria-hidden="true">🗺️</div>
+            <h3 class="stat-title">Стран</h3>
+            <p class="stat-value" id="stat-countries">—</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map + systems list -->
+    <section class="section section-map">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title">Карта трамвайных систем мира</h2>
+          <p class="section-description">
+            Нажмите на страну, чтобы увидеть список трамвайных систем. Страны с трамваем выделены цветом.
+          </p>
+        </header>
+
+        <div class="map-layout">
+          <div class="map-wrapper" aria-label="Карта мира с трамвайными системами">
+            <!-- SVG карта как отдельный файл -->
+            <object
+              id="world-map"
+              class="world-map-object"
+              type="image/svg+xml"
+              data="assets/world-map.svg"
+              aria-label="Интерактивная карта мира">
+              Ваш браузер не поддерживает встраивание SVG. Попробуйте другой браузер.
+            </object>
+            <p class="map-message" id="map-message" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="map-systems">
+            <div class="map-systems-header">
+              <h3 id="map-systems-title">Все трамвайные системы</h3>
+              <button id="map-reset" class="btn btn-sm btn-secondary" type="button">
+                Показать все
+              </button>
+            </div>
+            <p class="map-systems-count" id="map-systems-count"></p>
+            <ul class="map-systems-list" id="map-systems-list" aria-live="polite" aria-label="Список трамвайных систем"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest additions -->
+    <section class="section section-latest">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title">Последние добавления</h2>
+          <p class="section-description">
+            Новые трамвайные системы и модели вагонов, недавно появившиеся в базе TramGuide.
+          </p>
+        </header>
+
+        <div class="latest-layout">
+          <section aria-labelledby="latest-systems-title">
+            <h3 id="latest-systems-title" class="subsection-title">Трамвайные системы</h3>
+            <div class="card-grid" id="latest-systems">
+              <!-- Заполняется JavaScript -->
+            </div>
+          </section>
+
+          <section aria-labelledby="latest-vehicles-title">
+            <h3 id="latest-vehicles-title" class="subsection-title">Модели вагонов</h3>
+            <div class="card-grid" id="latest-vehicles">
+              <!-- Заполняется JavaScript -->
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-main">
+        <p class="footer-brand">
+          <span class="logo-icon">🚋</span>
+          <span class="logo-text">TramGuide</span>
+        </p>
+        <p class="footer-copy">
+          © <span class="js-current-year">2026</span> TramGuide. Все права защищены.
+        </p>
+      </div>
+      <div class="footer-links">
+        <nav aria-label="Ссылки подвала">
+          <a href="about.html" class="footer-link">О проекте</a>
+          <a href="systems.html" class="footer-link">Системы</a>
+          <a href="vehicles.html" class="footer-link">Вагоны</a>
+        </nav>
+        <div class="footer-social">
+          <span class="footer-social-label">Мы в соцсетях:</span>
+          <a href="#" class="footer-link" aria-label="Социальная сеть 1 (заглушка)">VK</a>
+          <a href="#" class="footer-link" aria-label="Социальная сеть 2 (заглушка)">Telegram</a>
+        </div>
+        <p class="footer-contact">
+          Контакты: <a href="mailto:info@tramguide.example" class="footer-link">info@tramguide.example</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Скрипты -->
+  <script src="js/map.js" defer></script>
+  <script src="js/filters.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
