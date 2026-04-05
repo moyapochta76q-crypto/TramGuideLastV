@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="100%" height="auto">
+  <style>
+    .country {
+      fill: #f5e0b2;
+      stroke: #c7b9a0;
+      stroke-width: 1;
+      cursor: pointer;
+      transition: fill 0.2s, stroke 0.2s;
+    }
+    .country:hover {
+      fill: #ffd54f;
+      stroke: #aa8f4f;
+    }
+    .country.has-trams {
+      fill: #ffe08a;
+    }
+    .country.active {
+      fill: #ffb300;
+      stroke: #c92a2a;
+      stroke-width: 2;
+    }
+  </style>
+  
+  <!-- Упрощённая карта Европы -->
+  
+  <!-- Россия (условный контур) -->
+  <path id="ru" class="country" d="M 750,150 L 950,180 L 980,250 L 920,320 L 850,340 L 780,300 L 750,250 Z"/>
+  
+  <!-- Германия -->
+  <path id="de" class="country" d="M 480,220 L 520,210 L 550,240 L 540,280 L 500,290 L 470,270 Z"/>
+  
+  <!-- Чехия -->
+  <path id="cz" class="country" d="M 540,250 L 570,245 L 580,270 L 560,285 L 540,280 Z"/>
+  
+  <!-- Франция -->
+  <path id="fr" class="country" d="M 420,240 L 460,230 L 470,280 L 450,320 L 400,310 L 390,270 Z"/>
+  
+  <!-- Польша -->
+  <path id="pl" class="country" d="M 550,200 L 600,190 L 620,230 L 600,260 L 560,250 L 545,220 Z"/>
+  
+  <!-- Украина -->
+  <path id="ua" class="country" d="M 620,240 L 720,230 L 740,280 L 700,310 L 640,300 L 615,270 Z"/>
+  
+  <!-- Испания -->
+  <path id="es" class="country" d="M 350,320 L 420,310 L 430,360 L 400,400 L 340,390 L 330,350 Z"/>
+  
+  <!-- Италия -->
+  <path id="it" class="country" d="M 520,300 L 550,295 L 560,350 L 540,420 L 520,430 L 510,380 L 515,320 Z"/>
+  
+  <!-- Великобритания -->
+  <path id="gb" class="country" d="M 380,160 L 420,150 L 440,190 L 430,230 L 400,240 L 370,210 Z"/>
+  
+  <!-- Нидерланды -->
+  <path id="nl" class="country" d="M 460,200 L 490,195 L 500,220 L 485,235 L 465,230 Z"/>
+  
+  <!-- Бельгия -->
+  <path id="be" class="country" d="M 455,230 L 475,225 L 480,245 L 465,255 L 450,245 Z"/>
+  
+  <!-- Швейцария -->
+  <path id="ch" class="country" d="M 490,270 L 515,265 L 520,285 L 505,295 L 485,285 Z"/>
+  
+  <!-- Австрия -->
+  <path id="at" class="country" d="M 530,265 L 570,260 L 580,285 L 560,300 L 525,295 Z"/>
+  
+  <!-- Узбекистан (условно) -->
+  <path id="uz" class="country" d="M 820,280 L 880,275 L 900,310 L 870,340 L 820,330 Z"/>
+</svg>
