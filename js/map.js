@@ -1,5 +1,4 @@
-// Логика интерактивной карты мира на главной странице.
-// Связь между SVG-картой и списком трамвайных систем.
+// Логика интерактивной карты мира: главная страница + страница "Трамвайные системы".
 
 (function () {
   'use strict';
@@ -20,7 +19,9 @@
       return;
     }
 
-    // Структура для быстрого поиска систем по стране
+    const pageType = document.body.dataset.page || '';
+
+    // Системы по стране
     const systemsByCountry = new Map();
     systems.forEach(system => {
       const country = system.country || 'Неизвестно';
@@ -30,29 +31,9 @@
       systemsByCountry.get(country).push(system);
     });
 
-    // Отрисовка всех систем по умолчанию
-    function renderAllSystems() {
-      const sorted = [...systems].sort((a, b) =>
-        a.city.localeCompare(b.city, 'ru') || a.name.localeCompare(b.name, 'ru')
-      );
-      titleEl.textContent = 'Все трамвайные системы';
-      countEl.textContent = `Всего систем: ${sorted.length}`;
-      listEl.innerHTML = systemsListToHTML(sorted);
-    }
-
-    function renderCountry(countryName) {
-      const list = systemsByCountry.get(countryName) || [];
-      const sorted = [...list].sort((a, b) =>
-        a.city.localeCompare(b.city, 'ru') || a.name.localeCompare(b.name, 'ru')
-      );
-      titleEl.textContent = `${countryName} (${sorted.length})`;
-      countEl.textContent = `Систем в стране: ${sorted.length}`;
-      listEl.innerHTML = systemsListToHTML(sorted);
-    }
-
     function systemsListToHTML(list) {
       if (!list.length) {
-        return '<li>В выбранной стране трамвайные системы не найдены.</li>';
+        return '<li>В выбранной стране данных о трамвайных системах пока нет.</li>';
       }
 
       return list.map(system => {
@@ -72,6 +53,36 @@
       }).join('');
     }
 
+    function renderAllSystems() {
+      const sorted = [...systems].sort((a, b) =>
+        a.city.localeCompare(b.city, 'ru') || a.name.localeCompare(b.name, 'ru')
+      );
+      titleEl.textContent = 'Все трамвайные системы';
+      countEl.textContent = `Всего систем: ${sorted.length}`;
+      listEl.innerHTML = systemsListToHTML(sorted);
+    }
+
+    function renderCountry(countryName) {
+      const list = systemsByCountry.get(countryName) || [];
+      const sorted = [...list].sort((a, b) =>
+        a.city.localeCompare(b.city, 'ru') || a.name.localeCompare(b.name, 'ru')
+      );
+      titleEl.textContent = `${countryName} (${sorted.length})`;
+      countEl.textContent = `Систем в стране: ${sorted.length}`;
+      listEl.innerHTML = systemsListToHTML(sorted);
+    }
+
+    // Синхронизация карты с фильтром "Страна" на странице systems.html
+    function syncFilterCountry(countryNameOrEmpty) {
+      if (pageType !== 'systems-list') return;
+      const countrySelect = document.getElementById('filter-country');
+      if (!countrySelect) return;
+
+      countrySelect.value = countryNameOrEmpty || '';
+      // Отправляем событие, чтобы пересчитались карточки и счётчик
+      countrySelect.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+
     // Инициализация после загрузки SVG
     mapObject.addEventListener('load', () => {
       try {
@@ -84,9 +95,10 @@
           return;
         }
 
+        // Берём все элементы с классом .country
         const countryPaths = svgDoc.querySelectorAll('.country');
         if (!countryPaths.length && messageEl) {
-          messageEl.textContent = 'SVG-карта загружена, но страны не найдены.';
+          messageEl.textContent = 'SVG-карта загружена, но страны с классом .country не найдены.';
         }
 
         // Помечаем страны, где есть трамвайные системы
@@ -101,7 +113,6 @@
           countryPaths.forEach(path => path.classList.remove('active'));
         }
 
-        // Обработчик выбора страны
         function selectCountry(countryName) {
           clearActive();
           const activePath = svgDoc.querySelector(`.country[data-country="${countryName}"]`);
@@ -109,6 +120,7 @@
             activePath.classList.add('active');
           }
           renderCountry(countryName);
+          syncFilterCountry(countryName);
         }
 
         countryPaths.forEach(path => {
@@ -136,6 +148,7 @@
         resetBtn.addEventListener('click', () => {
           clearActive();
           renderAllSystems();
+          syncFilterCountry('');
         });
 
         // Первичный список
@@ -152,7 +165,7 @@
       }
     });
 
-    // На случай, если SVG не загрузился (ошибка сети и т.п.)
+    // На случай, если SVG не загрузился
     mapObject.addEventListener('error', () => {
       if (messageEl) {
         messageEl.textContent = 'Не удалось загрузить SVG-карту. Список систем доступен ниже.';
@@ -161,6 +174,6 @@
     });
   }
 
-  // Экспортируем функцию в глобальный объект
+  // Экспортируем в глобальный объект
   window.initWorldMap = initWorldMap;
 })();
