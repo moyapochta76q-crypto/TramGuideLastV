@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Трамвайный вагон — TramGuide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Подробное описание модели трамвайного вагона: характеристики, фотографии и города эксплуатации.">
+  <meta name="keywords" content="трамвайный вагон, подвижной состав, характеристики трамвая">
+  <meta name="author" content="TramGuide">
+  <meta name="copyright" content="TramGuide 2026">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Трамвайный вагон — TramGuide">
+  <meta property="og:description" content="Характеристики и эксплуатация трамвайного вагона.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- SimpleLightbox -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplelightbox@2.14.1/dist/simple-lightbox.min.css">
+</head>
+<body data-page="vehicle-detail">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="На главную TramGuide">
+        <span class="logo-icon">🚋</span>
+        <span class="logo-text">TramGuide</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Переключить меню" aria-expanded="false" aria-controls="main-nav">
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Главная</a></li>
+          <li><a href="systems.html" class="nav-link">Трамвайные системы</a></li>
+          <li><a href="vehicles.html" class="nav-link nav-link--active">Вагоны</a></li>
+          <li><a href="about.html" class="nav-link">О проекте</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <section class="section">
+      <div class="container">
+        <a href="vehicles.html" class="btn btn-secondary btn-back">← Назад к списку вагонов</a>
+
+        <article class="vehicle-detail" aria-live="polite">
+          <header class="vehicle-header">
+            <h1 id="vehicle-title" class="vehicle-title">Загрузка...</h1>
+            <p id="vehicle-subtitle" class="vehicle-subtitle"></p>
+          </header>
+
+          <div class="vehicle-layout">
+            <!-- Галерея -->
+            <section class="vehicle-gallery" aria-label="Фотографии вагона">
+              <div class="vehicle-gallery-main">
+                <a href="#" id="vehicle-main-link" class="vehicle-main-link js-lightbox-gallery">
+                  <img id="vehicle-main-photo"
+                       src=""
+                       alt="Фотография трамвайного вагона"
+                       loading="lazy">
+                </a>
+                <button id="vehicle-fullscreen-btn"
+                        class="btn btn-outline btn-sm vehicle-fullscreen-btn"
+                        type="button">
+                  Полноэкранный просмотр
+                </button>
+              </div>
+              <div id="vehicle-thumbs" class="vehicle-gallery-thumbs js-lightbox-gallery">
+                <!-- Миниатюры -->
+              </div>
+            </section>
+
+            <!-- Характеристики -->
+            <section class="vehicle-specs" aria-label="Технические характеристики">
+              <h2 class="subsection-title">Характеристики</h2>
+              <div class="details-grid">
+                <dl class="details-list">
+                  <div class="details-row">
+                    <dt>Производитель</dt>
+                    <dd id="vehicle-manufacturer">—</dd>
+                  </div>
+                  <div class="details-row">
+                    <dt>Страна производства</dt>
+                    <dd id="vehicle-country">—</dd>
+                  </div>
+                  <div class="details-row">
+                    <dt>Годы выпуска</dt>
+                    <dd id="vehicle-years">—</dd>
+                  </div>
+                  <div class="details-row">
+                    <dt>Количество выпущенных</dt>
+                    <dd id="vehicle-total-produced">—</dd>
+                  </div>
+                  <div class="details-row">
+                    <dt>Длина</dt>
+                    <dd id="vehicle-length">—</dd>
+                  </div>
+                  <div class="details-row">
+                    <dt>Ширина</dt>
+                    <dd id="vehicle-width">—</dd>
+                  </div>
+                  <div class="details-row">
+                    <dt>Количество секций</dt>
+                    <dd id="vehicle-sections">—</dd>
+                  </div>
+                </dl>
+                <dl class="details-list">
+                  <div class="details-row">
+                    <dt>Вместимость (общая)</dt>
+                    <dd id="vehicle-capacity">—</dd>
+                  </div>
+                  <div class="details-row">
+                    <dt>Мест для сидения</dt>
+                    <dd id="vehicle-seating">—</dd>
+                  </div>
+                  <div class="details-row">
+                    <dt>Тип низкопольности</dt>
+                    <dd id="vehicle-floor-type">—</dd>
+                  </div>
+                  <div class="details-row">
+                    <dt>Тип питания</dt>
+                    <dd id="vehicle-power-type">—</dd>
+                  </div>
+                  <div class="details-row">
+                    <dt>Максимальная скорость</dt>
+                    <dd id="vehicle-max-speed">—</dd>
+                  </div>
+                </dl>
+              </div>
+            </section>
+          </div>
+
+          <!-- Где эксплуатируется -->
+          <section class="vehicle-operations" aria-label="Где эксплуатируется">
+            <h2 class="subsection-title">Где эксплуатируется</h2>
+            <ul id="vehicle-operates" class="operations-list">
+              <!-- Список систем -->
+            </ul>
+          </section>
+
+          <p id="vehicle-message" class="message message-error hidden" role="alert"></p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-main">
+        <p class="footer-brand">
+          <span class="logo-icon">🚋</span>
+          <span class="logo-text">TramGuide</span>
+        </p>
+        <p class="footer-copy">
+          © <span class="js-current-year">2026</span> TramGuide. Все права защищены.
+        </p>
+      </div>
+      <div class="footer-links">
+        <nav aria-label="Ссылки подвала">
+          <a href="about.html" class="footer-link">О проекте</a>
+          <a href="systems.html" class="footer-link">Системы</a>
+          <a href="vehicles.html" class="footer-link">Вагоны</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/simplelightbox@2.14.1/dist/simple-lightbox.min.js" defer></script>
+  <script src="js/map.js" defer></script>
+  <script src="js/filters.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
