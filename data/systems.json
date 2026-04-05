@@ -1,0 +1,117 @@
+[
+  {
+    "id": "moscow",
+    "name": "Московский трамвай",
+    "country": "Россия",
+    "city": "Москва",
+    "yearOpened": 1899,
+    "yearClosed": null,
+    "status": "действующая",
+    "trackLength": 181,
+    "gaugeType": 1520,
+    "numberOfRoutes": 39,
+    "numberOfVehicles": 850,
+    "operator": "Мосгортранс",
+    "coverImage": "https://via.placeholder.com/800x600?text=Московский+трамвай",
+    "history": "История московского трамвая началась в 1899 году с запуска первых линий в центре города. Со временем сеть расширялась, модернизировалась и переживала периоды сокращения. В XXI веке трамвай в Москве получил новый импульс развития благодаря обновлению подвижного состава и инфраструктуры.",
+    "description": "Современная трамвайная система Москвы — одна из крупнейших в Европе. Она играет важную роль в системе наземного городского транспорта, обеспечивая удобное и экологичное сообщение между районами города.",
+    "schemeImage": "https://via.placeholder.com/1200x800?text=Схема+московского+трамвая",
+    "photos": [
+      "https://via.placeholder.com/1200x800?text=Москва+трамвай+1",
+      "https://via.placeholder.com/1200x800?text=Москва+трамвай+2",
+      "https://via.placeholder.com/1200x800?text=Москва+трамвай+3"
+    ],
+    "rollingStock": ["71-623", "71-931M", "flexity"]
+  },
+  {
+    "id": "saint-petersburg",
+    "name": "Санкт-Петербургский трамвай",
+    "country": "Россия",
+    "city": "Санкт-Петербург",
+    "yearOpened": 1907,
+    "yearClosed": null,
+    "status": "действующая",
+    "trackLength": 205,
+    "gaugeType": 1520,
+    "numberOfRoutes": 40,
+    "numberOfVehicles": 750,
+    "operator": "Горэлектротранс",
+    "coverImage": "https://via.placeholder.com/800x600?text=Санкт-Петербургский+трамвай",
+    "history": "Трамвай в Санкт-Петербурге открылся в начале XX века и долгое время считался одной из крупнейших трамвайных систем в мире по протяжённости. В конце XX и начале XXI века ряд линий был демонтирован, но система продолжает играть важную роль в городской транспортной сети.",
+    "description": "Санкт-Петербургский трамвай известен разнообразием подвижного состава — от классических чешских Tatra до современных низкопольных вагонов.",
+    "schemeImage": null,
+    "photos": [
+      "https://via.placeholder.com/1200x800?text=СПб+трамвай+1",
+      "https://via.placeholder.com/1200x800?text=СПб+трамвай+2"
+    ],
+    "rollingStock": ["71-623", "tatra-t3"]
+  },
+  {
+    "id": "prague",
+    "name": "Пражский трамвай",
+    "country": "Чехия",
+    "city": "Прага",
+    "yearOpened": 1891,
+    "yearClosed": null,
+    "status": "действующая",
+    "trackLength": 142,
+    "gaugeType": 1435,
+    "numberOfRoutes": 26,
+    "numberOfVehicles": 900,
+    "operator": "DPP",
+    "coverImage": "https://via.placeholder.com/800x600?text=Пражский+трамвай",
+    "history": "Пражский трамвай является основой городской транспортной системы. Первая конно-железная дорога появилась ещё в XIX веке, а электрический трамвай был запущен в 1891 году. Сегодня в Праге эксплуатируются как исторические вагоны, так и современные низкопольные составы.",
+    "description": "Трамвайная сеть Праги хорошо интегрирована с метро и автобусами, обеспечивая плотное покрытие центральных и спальных районов.",
+    "schemeImage": "https://via.placeholder.com/1200x800?text=Схема+пражского+трамвая",
+    "photos": [
+      "https://via.placeholder.com/1200x800?text=Прага+трамвай+1",
+      "https://via.placeholder.com/1200x800?text=Прага+трамвай+2"
+    ],
+    "rollingStock": ["tatra-t3", "combino"]
+  },
+  {
+    "id": "berlin",
+    "name": "Берлинский трамвай",
+    "country": "Германия",
+    "city": "Берлин",
+    "yearOpened": 1865,
+    "yearClosed": null,
+    "status": "действующая",
+    "trackLength": 193,
+    "gaugeType": 1435,
+    "numberOfRoutes": 22,
+    "numberOfVehicles": 400,
+    "operator": "BVG",
+    "coverImage": "https://via.placeholder.com/800x600?text=Берлинский+трамвай",
+    "history": "Берлинский трамвай — одна из старейших систем в Германии. Сначала использовалась конка, затем конка была заменена электрическими вагонами. Сегодня сеть трамвая активна в основном в восточной части города.",
+    "description": "Берлин активно обновляет парк трамваев, внедряя современные низкопольные вагоны семейства Flexity.",
+    "schemeImage": "https://via.placeholder.com/1200x800?text=Схема+берлинского+трамвая",
+    "photos": [
+      "https://via.placeholder.com/1200x800?text=Берлин+трамвай+1",
+      "https://via.placeholder.com/1200x800?text=Берлин+трамвай+2"
+    ],
+    "rollingStock": ["combino", "flexity"]
+  },
+  {
+    "id": "tashkent",
+    "name": "Ташкентский трамвай",
+    "country": "Узбекистан",
+    "city": "Ташкент",
+    "yearOpened": 1901,
+    "yearClosed": 2016,
+    "status": "закрытая",
+    "trackLength": 90,
+    "gaugeType": 1520,
+    "numberOfRoutes": 6,
+    "numberOfVehicles": 200,
+    "operator": "Тошшахартрансхизмат",
+    "coverImage": "https://via.placeholder.com/800x600?text=Ташкентский+трамвай",
+    "history": "Трамвай в Ташкенте начал работу в начале XX века и долгое время был важным видом транспорта в городе. В 2016 году трамвайная система была полностью закрыта и демонтирована.",
+    "description": "Закрытие трамвайной системы в Ташкенте вызвало широкий общественный резонанс и стало примером отказа от рельсового транспорта в пользу автобусного.",
+    "schemeImage": null,
+    "photos": [
+      "https://via.placeholder.com/1200x800?text=Ташкент+трамвай+1"
+    ],
+    "rollingStock": ["tatra-t3"]
+  }
+]
