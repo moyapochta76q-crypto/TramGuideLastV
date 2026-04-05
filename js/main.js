@@ -197,7 +197,7 @@
 
       if (typeof window.initWorldMap === 'function') {
         // Временно отключено
-        window.initWorldMap(systems);
+        // window.initWorldMap(systems); // ВРЕМЕННО ОТКЛЮЧЕНО
       }
     } catch (error) {
       console.error(error);
@@ -339,7 +339,7 @@
 
       // Инициализируем карту и на странице каталога систем
       if (typeof window.initWorldMap === 'function') {
-        window.initWorldMap(systems);
+        // window.initWorldMap(systems); // ВРЕМЕННО ОТКЛЮЧЕНО
       }
     } catch (error) {
       console.error(error);
