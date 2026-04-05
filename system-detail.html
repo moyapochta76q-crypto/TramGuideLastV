@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Трамвайная система — TramGuide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Подробная информация о трамвайной системе: история, схема, галерея и подвижной состав.">
+  <meta name="keywords" content="трамвай, трамвайная система, история трамвая, схема трамвая">
+  <meta name="author" content="TramGuide">
+  <meta name="copyright" content="TramGuide 2026">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Трамвайная система — TramGuide">
+  <meta property="og:description" content="История, схема и подвижной состав трамвайной системы.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- SimpleLightbox (лайтбокс для галерей) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplelightbox@2.14.1/dist/simple-lightbox.min.css">
+</head>
+<body data-page="system-detail">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="На главную TramGuide">
+        <span class="logo-icon">🚋</span>
+        <span class="logo-text">TramGuide</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Переключить меню" aria-expanded="false" aria-controls="main-nav">
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Главная</a></li>
+          <li><a href="systems.html" class="nav-link nav-link--active">Трамвайные системы</a></li>
+          <li><a href="vehicles.html" class="nav-link">Вагоны</a></li>
+          <li><a href="about.html" class="nav-link">О проекте</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <section class="section">
+      <div class="container">
+        <a href="systems.html" class="btn btn-secondary btn-back">← Назад к списку систем</a>
+
+        <article class="system-detail" aria-live="polite">
+          <header class="system-header">
+            <h1 id="system-title" class="system-title">Загрузка...</h1>
+            <p id="system-subtitle" class="system-subtitle"></p>
+          </header>
+
+          <div class="system-layout">
+            <!-- Левая колонка: основные характеристики -->
+            <aside class="system-sidebar" aria-label="Характеристики трамвайной системы">
+              <div class="system-cover-wrapper">
+                <img id="system-cover"
+                     src=""
+                     alt="Обложка трамвайной системы"
+                     loading="lazy">
+              </div>
+
+              <h2 class="sidebar-title">Характеристики</h2>
+              <dl class="details-list">
+                <div class="details-row">
+                  <dt>Страна</dt>
+                  <dd id="system-country">—</dd>
+                </div>
+                <div class="details-row">
+                  <dt>Город</dt>
+                  <dd id="system-city">—</dd>
+                </div>
+                <div class="details-row">
+                  <dt>Год открытия</dt>
+                  <dd id="system-year-opened">—</dd>
+                </div>
+                <div class="details-row">
+                  <dt>Год закрытия</dt>
+                  <dd id="system-year-closed">—</dd>
+                </div>
+                <div class="details-row">
+                  <dt>Статус</dt>
+                  <dd id="system-status">—</dd>
+                </div>
+                <div class="details-row">
+                  <dt>Длина путей</dt>
+                  <dd id="system-track-length">—</dd>
+                </div>
+                <div class="details-row">
+                  <dt>Тип колеи</dt>
+                  <dd id="system-gauge-type">—</dd>
+                </div>
+                <div class="details-row">
+                  <dt>Количество маршрутов</dt>
+                  <dd id="system-routes">—</dd>
+                </div>
+                <div class="details-row">
+                  <dt>Количество вагонов</dt>
+                  <dd id="system-vehicles">—</dd>
+                </div>
+                <div class="details-row">
+                  <dt>Оператор</dt>
+                  <dd id="system-operator">—</dd>
+                </div>
+              </dl>
+            </aside>
+
+            <!-- Правая колонка: табы -->
+            <section class="system-main">
+              <!-- Табы -->
+              <div class="tabs" role="tablist" aria-label="Разделы описания трамвайной системы">
+                <button class="tab-btn"
+                        type="button"
+                        role="tab"
+                        aria-selected="true"
+                        aria-controls="tab-history"
+                        id="tab-history-btn"
+                        data-tab="history">
+                  История
+                </button>
+                <button class="tab-btn"
+                        type="button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="tab-scheme"
+                        id="tab-scheme-btn"
+                        data-tab="scheme">
+                  Схема
+                </button>
+                <button class="tab-btn"
+                        type="button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="tab-gallery"
+                        id="tab-gallery-btn"
+                        data-tab="gallery">
+                  Галерея
+                </button>
+                <button class="tab-btn"
+                        type="button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="tab-stock"
+                        id="tab-stock-btn"
+                        data-tab="stock">
+                  Подвижной состав
+                </button>
+                <button class="tab-btn"
+                        type="button"
+                        role="tab"
+                        aria-selected="false"
+                        aria-controls="tab-description"
+                        id="tab-description-btn"
+                        data-tab="description">
+                  Описание системы
+                </button>
+              </div>
+
+              <!-- Содержимое табов -->
+              <section id="tab-history"
+                       class="tab-content"
+                       role="tabpanel"
+                       aria-labelledby="tab-history-btn">
+                <div id="system-history-content" class="rich-text">
+                  <!-- История добавляется JavaScript -->
+                </div>
+              </section>
+
+              <section id="tab-scheme"
+                       class="tab-content"
+                       role="tabpanel"
+                       aria-labelledby="tab-scheme-btn">
+                <div id="system-scheme-content" class="scheme-wrapper">
+                  <!-- Схема или заглушка -->
+                </div>
+              </section>
+
+              <section id="tab-gallery"
+                       class="tab-content"
+                       role="tabpanel"
+                       aria-labelledby="tab-gallery-btn">
+                <div id="system-gallery-content">
+                  <!-- Галерея фотографий -->
+                </div>
+              </section>
+
+              <section id="tab-stock"
+                       class="tab-content"
+                       role="tabpanel"
+                       aria-labelledby="tab-stock-btn">
+                <div id="system-rollingstock-content">
+                  <!-- Список подвижного состава -->
+                </div>
+              </section>
+
+              <section id="tab-description"
+                       class="tab-content"
+                       role="tabpanel"
+                       aria-labelledby="tab-description-btn">
+                <div id="system-description-content" class="rich-text">
+                  <!-- Дублирование характеристик и особенности -->
+                </div>
+              </section>
+            </section>
+          </div>
+
+          <p id="system-message" class="message message-error hidden" role="alert"></p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-main">
+        <p class="footer-brand">
+          <span class="logo-icon">🚋</span>
+          <span class="logo-text">TramGuide</span>
+        </p>
+        <p class="footer-copy">
+          © <span class="js-current-year">2026</span> TramGuide. Все права защищены.
+        </p>
+      </div>
+      <div class="footer-links">
+        <nav aria-label="Ссылки подвала">
+          <a href="about.html" class="footer-link">О проекте</a>
+          <a href="systems.html" class="footer-link">Системы</a>
+          <a href="vehicles.html" class="footer-link">Вагоны</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/simplelightbox@2.14.1/dist/simple-lightbox.min.js" defer></script>
+  <script src="js/map.js" defer></script>
+  <script src="js/filters.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
