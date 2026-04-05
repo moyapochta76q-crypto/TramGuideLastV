@@ -47,6 +47,44 @@
   </header>
 
   <main class="site-main">
+    <!-- КАРТА НА СТРАНИЦЕ СИСТЕМ -->
+    <section class="section section-map">
+      <div class="container">
+        <header class="section-header">
+          <h2 class="section-title">Карта трамвайных систем мира</h2>
+          <p class="section-description">
+            Нажмите на страну, чтобы увидеть, какие трамвайные системы этой страны есть в базе.
+          </p>
+        </header>
+
+        <div class="map-layout">
+          <div class="map-wrapper" aria-label="Карта мира с трамвайными системами">
+            <object
+              id="world-map"
+              class="world-map-object"
+              type="image/svg+xml"
+              data="assets/world-map.svg"
+              aria-label="Интерактивная карта мира">
+              Ваш браузер не поддерживает встраивание SVG. Попробуйте другой браузер.
+            </object>
+            <p class="map-message" id="map-message" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="map-systems">
+            <div class="map-systems-header">
+              <h3 id="map-systems-title">Все трамвайные системы</h3>
+              <button id="map-reset" class="btn btn-sm btn-secondary" type="button">
+                Показать все
+              </button>
+            </div>
+            <p class="map-systems-count" id="map-systems-count"></p>
+            <ul class="map-systems-list" id="map-systems-list" aria-live="polite" aria-label="Список трамвайных систем"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ФИЛЬТРЫ И КАРТОЧКИ -->
     <section class="section">
       <div class="container">
         <header class="section-header">
