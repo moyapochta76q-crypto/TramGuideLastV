@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Трамвайные системы мира — TramGuide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Каталог трамвайных систем мира: характеристики, статус, годы работы и подвижной состав.">
+  <meta name="keywords" content="трамвайные системы, городской транспорт, трамвай, каталог">
+  <meta name="author" content="TramGuide">
+  <meta name="copyright" content="TramGuide 2026">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Трамвайные системы мира — TramGuide">
+  <meta property="og:description" content="Обзор трамвайных систем мира с фильтрацией по странам, городам и статусу.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="systems-list">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="На главную TramGuide">
+        <span class="logo-icon">🚋</span>
+        <span class="logo-text">TramGuide</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Переключить меню" aria-expanded="false" aria-controls="main-nav">
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Главная</a></li>
+          <li><a href="systems.html" class="nav-link nav-link--active">Трамвайные системы</a></li>
+          <li><a href="vehicles.html" class="nav-link">Вагоны</a></li>
+          <li><a href="about.html" class="nav-link">О проекте</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <section class="section">
+      <div class="container">
+        <header class="section-header">
+          <h1 class="section-title">Трамвайные системы мира</h1>
+          <p class="section-description">
+            Фильтруйте трамвайные системы по стране, городу и статусу работы.
+          </p>
+        </header>
+
+        <div class="layout-with-sidebar">
+          <!-- Filters -->
+          <aside class="filters" aria-label="Фильтрация трамвайных систем">
+            <button class="filters-toggle" type="button"
+                    aria-expanded="false"
+                    aria-controls="systems-filters-content">
+              Фильтры
+            </button>
+            <div class="filters-content" id="systems-filters-content">
+              <div class="filters-group">
+                <label for="filter-country" class="filters-label">Страна</label>
+                <select id="filter-country" class="filters-control">
+                  <option value="">Все страны</option>
+                  <!-- Опции добавляются динамически -->
+                </select>
+              </div>
+
+              <div class="filters-group">
+                <label for="filter-city" class="filters-label">Город</label>
+                <input id="filter-city"
+                       type="search"
+                       class="filters-control"
+                       placeholder="Введите название города">
+                <p class="filters-hint">Поиск с автодополнением по мере ввода.</p>
+              </div>
+
+              <fieldset class="filters-group">
+                <legend class="filters-label">Статус системы</legend>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="status-active" checked>
+                  <span>Действующие</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="status-closed" checked>
+                  <span>Закрытые</span>
+                </label>
+              </fieldset>
+
+              <div class="filters-actions">
+                <button id="systems-reset" class="btn btn-secondary btn-sm" type="button">
+                  Сбросить фильтры
+                </button>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Results -->
+          <section class="results" aria-label="Список трамвайных систем">
+            <div class="results-header">
+              <p id="systems-count" class="results-count">Найдено систем: 0</p>
+            </div>
+            <div id="systems-grid" class="card-grid">
+              <!-- Карточки систем добавляются JavaScript -->
+            </div>
+            <p id="systems-empty" class="results-empty hidden">
+              По заданным фильтрам трамвайные системы не найдены.
+            </p>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-main">
+        <p class="footer-brand">
+          <span class="logo-icon">🚋</span>
+          <span class="logo-text">TramGuide</span>
+        </p>
+        <p class="footer-copy">
+          © <span class="js-current-year">2026</span> TramGuide. Все права защищены.
+        </p>
+      </div>
+      <div class="footer-links">
+        <nav aria-label="Ссылки подвала">
+          <a href="about.html" class="footer-link">О проекте</a>
+          <a href="systems.html" class="footer-link">Системы</a>
+          <a href="vehicles.html" class="footer-link">Вагоны</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/map.js" defer></script>
+  <script src="js/filters.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
