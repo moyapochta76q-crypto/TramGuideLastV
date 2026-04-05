@@ -1,4 +1,7 @@
-// Логика интерактивной карты мира: главная страница + страница "Трамвайные системы".
+// Логика интерактивной карты мира:
+// - главная страница (index.html)
+// - страница "Трамвайные системы" (systems.html)
+// Добавлен зум и панорамирование через svg-pan-zoom.
 
 (function () {
   'use strict';
@@ -20,8 +23,9 @@
     }
 
     const pageType = document.body.dataset.page || '';
+    let panZoomInstance = null; // экземпляр svg-pan-zoom
 
-    // Системы по стране
+    // Группируем системы по странам
     const systemsByCountry = new Map();
     systems.forEach(system => {
       const country = system.country || 'Неизвестно';
@@ -55,7 +59,8 @@
 
     function renderAllSystems() {
       const sorted = [...systems].sort((a, b) =>
-        a.city.localeCompare(b.city, 'ru') || a.name.localeCompare(b.name, 'ru')
+        a.city.localeCompare(b.city, 'ru') ||
+        a.name.localeCompare(b.name, 'ru')
       );
       titleEl.textContent = 'Все трамвайные системы';
       countEl.textContent = `Всего систем: ${sorted.length}`;
@@ -65,7 +70,8 @@
     function renderCountry(countryName) {
       const list = systemsByCountry.get(countryName) || [];
       const sorted = [...list].sort((a, b) =>
-        a.city.localeCompare(b.city, 'ru') || a.name.localeCompare(b.name, 'ru')
+        a.city.localeCompare(b.city, 'ru') ||
+        a.name.localeCompare(b.name, 'ru')
       );
       titleEl.textContent = `${countryName} (${sorted.length})`;
       countEl.textContent = `Систем в стране: ${sorted.length}`;
@@ -79,11 +85,10 @@
       if (!countrySelect) return;
 
       countrySelect.value = countryNameOrEmpty || '';
-      // Отправляем событие, чтобы пересчитались карточки и счётчик
       countrySelect.dispatchEvent(new Event('change', { bubbles: true }));
     }
 
-    // Инициализация после загрузки SVG
+    // Инициализация после загрузки SVG-карты
     mapObject.addEventListener('load', () => {
       try {
         const svgDoc = mapObject.contentDocument;
@@ -95,7 +100,29 @@
           return;
         }
 
-        // Берём все элементы с классом .country
+        const svgRoot = svgDoc.querySelector('svg');
+
+        // Подключаем панорамирование и зум, если библиотека svg-pan-zoom загружена
+        if (window.svgPanZoom && svgRoot) {
+          panZoomInstance = window.svgPanZoom(svgRoot, {
+            zoomEnabled: true,
+            panEnabled: true,
+            controlIconsEnabled: true,      // плюсик/минусик и кнопка "домой"
+            fit: true,                      // подогнать под контейнер
+            center: true,                   // центрировать
+            minZoom: 0.7,
+            maxZoom: 10,
+            zoomScaleSensitivity: 0.3,
+            dblClickZoomEnabled: true,
+            mouseWheelZoomEnabled: true
+          });
+
+          // Немного увеличим стартовый масштаб (если нужно)
+          const currentZoom = panZoomInstance.getZoom();
+          panZoomInstance.zoom(currentZoom * 1.1);
+        }
+
+        // Ищем страны
         const countryPaths = svgDoc.querySelectorAll('.country');
         if (!countryPaths.length && messageEl) {
           messageEl.textContent = 'SVG-карта загружена, но страны с классом .country не найдены.';
@@ -127,7 +154,7 @@
           const countryName = path.getAttribute('data-country') || '';
           if (!countryName) return;
 
-          // Делаем страны доступными с клавиатуры
+          // Доступность: навигация с клавиатуры
           path.setAttribute('tabindex', '0');
           path.setAttribute('role', 'button');
           path.setAttribute('aria-label', `Страна ${countryName}`);
@@ -149,6 +176,12 @@
           clearActive();
           renderAllSystems();
           syncFilterCountry('');
+
+          // Сброс масштаба и центра (к начальному виду)
+          if (panZoomInstance) {
+            panZoomInstance.resetZoom();
+            panZoomInstance.center();
+          }
         });
 
         // Первичный список
