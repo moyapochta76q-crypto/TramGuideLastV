@@ -4,8 +4,8 @@
 //
 // Здесь:
 // 1) Панорамирование и зум через svg-pan-zoom;
-// 2) Стартовый вид – увеличенный, с фокусом на Европе (Германия + Чехия,
-//    либо примерная область по viewBox, если страны ещё не размечены);
+// 2) Стартовый вид – увеличенный, с фокусом на Европе
+//    (по Германии и Чехии, либо по примерной области viewBox);
 // 3) Колёсико над картой не скроллит страницу;
 // 4) Карта инициализируется и если SVG загрузился раньше JS, и если позже.
 
@@ -32,6 +32,24 @@
 
     let panZoomInstance = null;
     let initialized = false;
+
+    // Блокируем прокрутку страницы, когда колесо крутят над блоком карты
+    const mapWrapper = mapObject.closest('.map-wrapper');
+    if (mapWrapper) {
+      try {
+        mapWrapper.addEventListener(
+          'wheel',
+          function (event) {
+            event.preventDefault();
+          },
+          { passive: false }
+        );
+      } catch (e) {
+        mapWrapper.addEventListener('wheel', function (event) {
+          event.preventDefault();
+        });
+      }
+    }
 
     // Группируем системы по странам
     const systemsByCountry = new Map();
@@ -108,8 +126,8 @@
     function focusOnEurope(svgDoc) {
       if (!panZoomInstance) return;
 
-      const svgRoot = svgDoc.querySelector('svg');
-      if (!svgRoot) return;
+      const svgRoot = svgDoc.documentElement;
+      if (!svgRoot || svgRoot.nodeName.toLowerCase() !== 'svg') return;
 
       let bbox = null;
 
@@ -137,8 +155,7 @@
         const vb = svgRoot.viewBox && svgRoot.viewBox.baseVal;
         if (!vb || !vb.width || !vb.height) return;
 
-        // Примерные границы Европы в проекции всей карты:
-        // по ширине – от 25% до 65%, по высоте – от 10% до 55% viewBox
+        // Примерные границы Европы: 25–65% ширины, 10–55% высоты viewBox
         const x1 = vb.x + vb.width * 0.25;
         const x2 = vb.x + vb.width * 0.65;
         const y1 = vb.y + vb.height * 0.1;
@@ -172,8 +189,8 @@
       if (initialized) return;
       initialized = true;
 
-      const svgRoot = svgDoc.querySelector('svg');
-      if (!svgRoot) {
+      const svgRoot = svgDoc.documentElement;
+      if (!svgRoot || svgRoot.nodeName.toLowerCase() !== 'svg') {
         if (messageEl) {
           messageEl.textContent = 'Не удалось найти корневой элемент SVG.';
         }
@@ -197,7 +214,7 @@
         });
       }
 
-      // Блокируем прокрутку страницы при прокрутке колёсиком над картой
+      // Дополнительно блокируем скролл страницы по колесику внутри самого SVG
       try {
         svgRoot.addEventListener(
           'wheel',
