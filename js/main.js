@@ -335,6 +335,11 @@
       if (window.TramFilters && typeof window.TramFilters.initSystemFilters === 'function') {
         window.TramFilters.initSystemFilters(systems, render, updateCount);
       }
+
+      // Инициализируем карту и на странице каталога систем
+      if (typeof window.initWorldMap === 'function') {
+        window.initWorldMap(systems);
+      }
     } catch (error) {
       console.error(error);
       if (emptyEl) {
