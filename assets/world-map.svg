@@ -4,16 +4,24 @@
   viewBox="0 0 1000 500"
   role="img"
   aria-labelledby="title desc">
-  <title id="title">Упрощённая карта мира</title>
-  <desc id="desc">Схематичная карта с выделением некоторых стран для примера работы интерактивной карты.</desc>
+  <title id="title">Схематичная карта мира</title>
+  <desc id="desc">Условная карта мира с выделением России, Германии, Чехии и Узбекистана.</desc>
 
   <style><![CDATA[
+    .ocean {
+      fill: #d7ecff;
+    }
+    .land {
+      fill: #e8dcc7;
+      stroke: #c7b9a0;
+      stroke-width: 1;
+    }
     .country {
-      fill: #f5e8d5;
+      fill: #f5e0b2;
       stroke: #c7b9a0;
       stroke-width: 1;
       cursor: pointer;
-      transition: fill 0.2s ease-out, stroke 0.2s ease-out;
+      transition: fill 0.2s ease-out, stroke 0.2s ease-out, stroke-width 0.2s ease-out;
     }
     .country:hover {
       fill: #ffd54f;
@@ -25,60 +33,96 @@
     .country.active {
       fill: #ffb300;
       stroke: #c92a2a;
-      stroke-width: 1.5;
+      stroke-width: 1.6;
     }
   ]]></style>
 
-  <!-- Лёгкая подложка континентов для ориентира -->
-  <path
-    d="M40 80h920v260H40z"
-    fill="#efe2cf"
-    opacity="0.4"
-    stroke="#decbb2"
-    stroke-width="1" />
+  <!-- Океан -->
+  <rect x="0" y="0" width="1000" height="500" class="ocean" />
 
-  <!-- Россия (очень условный прямоугольник) -->
+  <!-- Условные континенты для фона (НЕ интерактивные) -->
+  <!-- Америка -->
+  <path
+    class="land"
+    d="M140 80 L220 60 L280 80 L300 140 L290 200 L250 260 L230 330 L190 340 L150 310 L140 260 L120 200 L110 150 Z" />
+  <!-- Африка/Ближний Восток -->
+  <path
+    class="land"
+    d="M420 210 L470 210 L520 220 L560 240 L580 280 L570 340 L540 390 L500 410 L460 400 L440 360 L430 310 L410 260 Z" />
+  <!-- Восточная Азия/Юго-Восточная Азия -->
+  <path
+    class="land"
+    d="M720 180 L780 170 L840 190 L880 240 L890 290 L870 330 L830 360 L790 350 L770 320 L750 280 L730 240 Z" />
+
+  <!-- Интерактивные страны -->
+
+  <!-- Россия -->
   <path
     class="country"
     id="country-russia"
     data-country="Россия"
-    d="M420 90h320v120H420z" />
+    d="M350 90
+       L480 70
+       L640 70
+       L740 80
+       L820 110
+       L870 140
+       L860 170
+       L830 190
+       L780 200
+       L720 205
+       L650 210
+       L600 205
+       L550 200
+       L500 190
+       L450 180
+       L400 170
+       L360 150
+       L340 130 Z" />
 
   <!-- Германия -->
   <path
     class="country"
     id="country-germany"
     data-country="Германия"
-    d="M380 190h70v70h-70z" />
+    d="M410 200
+       L435 190
+       L465 192
+       L485 205
+       L495 230
+       L490 255
+       L470 270
+       L440 270
+       L420 255
+       L410 230 Z" />
 
   <!-- Чехия -->
   <path
     class="country"
     id="country-czechia"
     data-country="Чехия"
-    d="M380 170h70v20h-70z" />
-
-  <!-- Австрия -->
-  <path
-    class="country"
-    id="country-austria"
-    data-country="Австрия"
-    d="M380 260h70v20h-70z" />
+    d="M430 185
+       L455 178
+       L482 180
+       L500 190
+       L492 203
+       L470 210
+       L445 208 Z" />
 
   <!-- Узбекистан -->
   <path
     class="country"
     id="country-uzbekistan"
     data-country="Узбекистан"
-    d="M520 230h120v40H520z" />
+    d="M540 235
+       L585 228
+       L630 228
+       L675 235
+       L690 250
+       L680 265
+       L650 272
+       L610 272
+       L570 268
+       L545 258 Z" />
 
-  <!-- Несколько «фоновых» стран без атрибута data-country -->
-  <path
-    class="country"
-    d="M260 170h80v80h-80z"
-    opacity="0.5" />
-  <path
-    class="country"
-    d="M680 170h80v80h-80z"
-    opacity="0.5" />
 </svg>
