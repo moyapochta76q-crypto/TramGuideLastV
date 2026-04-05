@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Трамвайные вагоны — TramGuide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Каталог трамвайных вагонов: производители, характеристики, типы и количество секций.">
+  <meta name="keywords" content="трамвай, трамвайные вагоны, подвижной состав, низкопольный трамвай">
+  <meta name="author" content="TramGuide">
+  <meta name="copyright" content="TramGuide 2026">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Трамвайные вагоны — TramGuide">
+  <meta property="og:description" content="Каталог моделей трамвайных вагонов с фильтрацией по производителю и характеристикам.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="vehicles-list">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo" aria-label="На главную TramGuide">
+        <span class="logo-icon">🚋</span>
+        <span class="logo-text">TramGuide</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-label="Переключить меню" aria-expanded="false" aria-controls="main-nav">
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+        <span class="nav-toggle-line"></span>
+      </button>
+
+      <nav id="main-nav" class="main-nav" aria-label="Основная навигация">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Главная</a></li>
+          <li><a href="systems.html" class="nav-link">Трамвайные системы</a></li>
+          <li><a href="vehicles.html" class="nav-link nav-link--active">Вагоны</a></li>
+          <li><a href="about.html" class="nav-link">О проекте</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <section class="section">
+      <div class="container">
+        <header class="section-header">
+          <h1 class="section-title">Трамвайные вагоны</h1>
+          <p class="section-description">
+            Фильтруйте вагоны по производителю, стране производства, типу пола и количеству секций.
+          </p>
+        </header>
+
+        <div class="layout-with-sidebar">
+          <!-- Filters -->
+          <aside class="filters" aria-label="Фильтрация трамвайных вагонов">
+            <button class="filters-toggle" type="button"
+                    aria-expanded="false"
+                    aria-controls="vehicles-filters-content">
+              Фильтры
+            </button>
+            <div class="filters-content" id="vehicles-filters-content">
+              <div class="filters-group">
+                <label for="filter-manufacturer" class="filters-label">Производитель</label>
+                <select id="filter-manufacturer" class="filters-control">
+                  <option value="">Все производители</option>
+                  <!-- Опции добавляются динамически -->
+                </select>
+              </div>
+
+              <div class="filters-group">
+                <label for="filter-prod-country" class="filters-label">Страна производства</label>
+                <select id="filter-prod-country" class="filters-control">
+                  <option value="">Все страны</option>
+                  <!-- Опции добавляются динамически -->
+                </select>
+              </div>
+
+              <fieldset class="filters-group">
+                <legend class="filters-label">Тип пола</legend>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="floor-high" checked>
+                  <span>Высокопольный</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="floor-low" checked>
+                  <span>Низкопольный</span>
+                </label>
+                <label class="checkbox-label">
+                  <input type="checkbox" id="floor-partial" checked>
+                  <span>Частично низкопольный</span>
+                </label>
+              </fieldset>
+
+              <fieldset class="filters-group">
+                <legend class="filters-label">Количество секций</legend>
+                <div class="filters-multicol">
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="sections-1" checked>
+                    <span>1-секционный</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="sections-2" checked>
+                    <span>2-секционный</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="sections-3" checked>
+                    <span>3-секционный</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="sections-5" checked>
+                    <span>5-секционный</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="sections-7" checked>
+                    <span>7-секционный</span>
+                  </label>
+                  <label class="checkbox-label">
+                    <input type="checkbox" id="sections-9" checked>
+                    <span>9-секционный</span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="filters-actions">
+                <button id="vehicles-reset" class="btn btn-secondary btn-sm" type="button">
+                  Сбросить фильтры
+                </button>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Results -->
+          <section class="results" aria-label="Список моделей вагонов">
+            <div class="results-header">
+              <p id="vehicles-count" class="results-count">Найдено вагонов: 0</p>
+            </div>
+            <div id="vehicles-grid" class="card-grid">
+              <!-- Карточки вагонов добавляются JavaScript -->
+            </div>
+            <p id="vehicles-empty" class="results-empty hidden">
+              По заданным фильтрам вагоны не найдены.
+            </p>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-main">
+        <p class="footer-brand">
+          <span class="logo-icon">🚋</span>
+          <span class="logo-text">TramGuide</span>
+        </p>
+        <p class="footer-copy">
+          © <span class="js-current-year">2026</span> TramGuide. Все права защищены.
+        </p>
+      </div>
+      <div class="footer-links">
+        <nav aria-label="Ссылки подвала">
+          <a href="about.html" class="footer-link">О проекте</a>
+          <a href="systems.html" class="footer-link">Системы</a>
+          <a href="vehicles.html" class="footer-link">Вагоны</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/map.js" defer></script>
+  <script src="js/filters.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
