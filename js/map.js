@@ -11,7 +11,69 @@
 
 (function () {
   'use strict';
+  // Таблица соответствия: код страны в SVG → название на русском (как в systems.json)
+  const COUNTRY_CODES = {
+    'ru': 'Россия',
+    'de': 'Германия',
+    'cz': 'Чехия',
+    'ua': 'Украина',
+    'pl': 'Польша',
+    'fr': 'Франция',
+    'at': 'Австрия',
+    'ch': 'Швейцария',
+    'be': 'Бельгия',
+    'nl': 'Нидерланды',
+    'gb': 'Великобритания',
+    'es': 'Испания',
+    'pt': 'Португалия',
+    'it': 'Италия',
+    'hu': 'Венгрия',
+    'ro': 'Румыния',
+    'bg': 'Болгария',
+    'rs': 'Сербия',
+    'hr': 'Хорватия',
+    'si': 'Словения',
+    'sk': 'Словакия',
+    'by': 'Беларусь',
+    'lt': 'Литва',
+    'lv': 'Латвия',
+    'ee': 'Эстония',
+    'fi': 'Финляндия',
+    'se': 'Швеция',
+    'no': 'Норвегия',
+    'dk': 'Дания',
+    'us': 'США',
+    'ca': 'Канада',
+    'mx': 'Мексика',
+    'br': 'Бразилия',
+    'ar': 'Аргентина',
+    'au': 'Австралия',
+    'nz': 'Новая Зеландия',
+    'jp': 'Япония',
+    'cn': 'Китай',
+    'kr': 'Южная Корея',
+    'in': 'Индия',
+    'tr': 'Турция',
+    'eg': 'Египет',
+    'za': 'ЮАР',
+    'ma': 'Марокко',
+    'tn': 'Тунис',
+    'dz': 'Алжир',
+    'uz': 'Узбекистан',
+    'kz': 'Казахстан',
+    'ge': 'Грузия',
+    'az': 'Азербайджан',
+    'am': 'Армения',
+    'gr': 'Греция',
+    'ie': 'Ирландия',
+    'lu': 'Люксембург'
+  };
 
+  // Обратная таблица: название → код
+  const COUNTRY_NAMES = {};
+  for (const [code, name] of Object.entries(COUNTRY_CODES)) {
+    COUNTRY_NAMES[name] = code;
+  }
   /**
    * Инициализация карты мира.
    * @param {Array<object>} systems
@@ -132,8 +194,8 @@
       let bbox = null;
 
       // Пытаемся найти Германию и Чехию по data-country
-      ['Германия', 'Чехия'].forEach(name => {
-        const el = svgDoc.querySelector(`.country[data-country="${name}"]`);
+        ['de', 'cz'].forEach(code => {
+        const el = svgDoc.getElementById(code);
         if (!el) return;
 
         const b = el.getBBox();
@@ -229,7 +291,7 @@
         });
       }
 
-      const countryPaths = svgDoc.querySelectorAll('.country');
+      const countryPaths = svgDoc.querySelectorAll('.landxx');
       if (!countryPaths.length && messageEl) {
         messageEl.textContent =
           'SVG-карта загружена, но страны с классом .country не найдены.';
@@ -237,13 +299,14 @@
 
       // Помечаем страны, где есть трамвайные системы
       systemsByCountry.forEach((_value, countryName) => {
-        const path = svgDoc.querySelector(
-          `.country[data-country="${countryName}"]`
-        );
+        const countryCode = COUNTRY_NAMES[countryName];
+        if (countryCode) {
+        const path = svgDoc.getElementById(countryCode);
         if (path) {
-          path.classList.add('has-trams');
-        }
-      });
+        path.classList.add('has-trams');
+    }
+  }
+});
 
       // Фокусируем стартовый вид на Европе (чуть позже, чтобы svg-pan-zoom успел посчитать размеры)
       if (panZoomInstance) {
@@ -256,9 +319,8 @@
 
       function selectCountry(countryName) {
         clearActive();
-        const activePath = svgDoc.querySelector(
-          `.country[data-country="${countryName}"]`
-        );
+        const countryCode = COUNTRY_NAMES[countryName];
+        const activePath = countryCode ? svgDoc.getElementById(countryCode) : null;
         if (activePath) {
           activePath.classList.add('active');
         }
@@ -268,8 +330,11 @@
 
       // Обработчики кликов и клавиш
       countryPaths.forEach(path => {
-        const countryName = path.getAttribute('data-country') || '';
-        if (!countryName) return;
+     // Получаем код страны из id (например, "ru", "de")
+     const countryCode = path.id || '';
+     // Преобразуем в русское название
+     const countryName = COUNTRY_CODES[countryCode.toLowerCase()] || '';
+  if (!countryName) return;
 
         path.setAttribute('tabindex', '0');
         path.setAttribute('role', 'button');
