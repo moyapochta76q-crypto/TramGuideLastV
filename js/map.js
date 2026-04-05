@@ -2,11 +2,12 @@
 // - главная страница (index.html)
 // - страница "Трамвайные системы" (systems.html)
 //
-// Тут:
+// Здесь:
 // 1) Панорамирование и зум через svg-pan-zoom;
-// 2) Стартовый вид — увеличенный, с фокусом на Европе (по Германии и Чехии);
-// 3) Отключаем прокрутку страницы колёсиком, когда курсор над картой;
-// 4) Карта работает и если SVG уже успел загрузиться до вызова initWorldMap.
+// 2) Стартовый вид – увеличенный, с фокусом на Европе (Германия + Чехия,
+//    либо примерная область по viewBox, если страны ещё не размечены);
+// 3) Колёсико над картой не скроллит страницу;
+// 4) Карта инициализируется и если SVG загрузился раньше JS, и если позже.
 
 (function () {
   'use strict';
@@ -32,19 +33,6 @@
     let panZoomInstance = null;
     let initialized = false;
 
-    // Отключаем скролл страницы, когда крутим колёсико над картой
-    try {
-      mapObject.addEventListener(
-        'wheel',
-        function (event) {
-          event.preventDefault();
-        },
-        { passive: false }
-      );
-    } catch (e) {
-      // на всякий случай, если браузер не поддерживает passive:false
-    }
-
     // Группируем системы по странам
     const systemsByCountry = new Map();
     systems.forEach(system => {
@@ -68,13 +56,13 @@
             : status;
 
           return `
-          <li>
-            • <a href="system-detail.html?id=${encodeURIComponent(system.id)}">
-              ${system.city}, ${system.country} — ${system.name}
-            </a>
-            <span class="map-system-years">(${yearsText})</span>
-          </li>
-        `;
+            <li>
+              • <a href="system-detail.html?id=${encodeURIComponent(system.id)}">
+                ${system.city}, ${system.country} — ${system.name}
+              </a>
+              <span class="map-system-years">(${yearsText})</span>
+            </li>
+          `;
         })
         .join('');
     }
@@ -113,8 +101,9 @@
     }
 
     /**
-     * Фокус на Европе (по Германии и Чехии).
-     * Используем их bounding box, чтобы выставить зум и панорамирование.
+     * Фокус на Европе.
+     * 1) Пробуем использовать bbox Германии и Чехии (если размечены).
+     * 2) Если нет — берём примерный прямоугольник из viewBox.
      */
     function focusOnEurope(svgDoc) {
       if (!panZoomInstance) return;
@@ -122,12 +111,10 @@
       const svgRoot = svgDoc.querySelector('svg');
       if (!svgRoot) return;
 
-      // Страны, по которым считаем границы Европы
-      const europeCountries = ['Германия', 'Чехия'];
-
       let bbox = null;
 
-      europeCountries.forEach(name => {
+      // Пытаемся найти Германию и Чехию по data-country
+      ['Германия', 'Чехия'].forEach(name => {
         const el = svgDoc.querySelector(`.country[data-country="${name}"]`);
         if (!el) return;
 
@@ -145,7 +132,20 @@
         }
       });
 
-      if (!bbox) return;
+      // Если bbox по странам не нашли — берём примерную "Европу" по viewBox
+      if (!bbox) {
+        const vb = svgRoot.viewBox && svgRoot.viewBox.baseVal;
+        if (!vb || !vb.width || !vb.height) return;
+
+        // Примерные границы Европы в проекции всей карты:
+        // по ширине – от 25% до 65%, по высоте – от 10% до 55% viewBox
+        const x1 = vb.x + vb.width * 0.25;
+        const x2 = vb.x + vb.width * 0.65;
+        const y1 = vb.y + vb.height * 0.1;
+        const y2 = vb.y + vb.height * 0.55;
+
+        bbox = { x1, y1, x2, y2 };
+      }
 
       const width = bbox.x2 - bbox.x1;
       const height = bbox.y2 - bbox.y1;
@@ -156,7 +156,6 @@
       const vpWidth = sizes.width;
       const vpHeight = sizes.height;
 
-      // Зум так, чтобы Европа заняла большую часть окна, но с небольшими полями
       const zoom = Math.min(vpWidth / width, vpHeight / height) * 0.9;
 
       panZoomInstance.zoom(zoom);
@@ -167,20 +166,27 @@
     }
 
     /**
-     * Основная инициализация по готовому svg-документу.
+     * Основная инициализация по уже загруженному SVG-документу.
      */
     function setupSvg(svgDoc) {
       if (initialized) return;
       initialized = true;
 
       const svgRoot = svgDoc.querySelector('svg');
+      if (!svgRoot) {
+        if (messageEl) {
+          messageEl.textContent = 'Не удалось найти корневой элемент SVG.';
+        }
+        renderAllSystems();
+        return;
+      }
 
-      // Подключаем панорамирование и зум, если библиотека svg-pan-zoom загружена
-      if (window.svgPanZoom && svgRoot) {
+      // Подключаем панорамирование и зум
+      if (window.svgPanZoom) {
         panZoomInstance = window.svgPanZoom(svgRoot, {
           zoomEnabled: true,
           panEnabled: true,
-          controlIconsEnabled: true, // плюс/минус и "домик"
+          controlIconsEnabled: true,
           fit: true,
           center: true,
           minZoom: 0.7,
@@ -191,7 +197,21 @@
         });
       }
 
-      // Страны на карте
+      // Блокируем прокрутку страницы при прокрутке колёсиком над картой
+      try {
+        svgRoot.addEventListener(
+          'wheel',
+          function (event) {
+            event.preventDefault();
+          },
+          { passive: false }
+        );
+      } catch (e) {
+        svgRoot.addEventListener('wheel', function (event) {
+          event.preventDefault();
+        });
+      }
+
       const countryPaths = svgDoc.querySelectorAll('.country');
       if (!countryPaths.length && messageEl) {
         messageEl.textContent =
@@ -208,9 +228,9 @@
         }
       });
 
-      // Фокусируем стартовый вид на Европе
+      // Фокусируем стартовый вид на Европе (чуть позже, чтобы svg-pan-zoom успел посчитать размеры)
       if (panZoomInstance) {
-        focusOnEurope(svgDoc);
+        setTimeout(() => focusOnEurope(svgDoc), 0);
       }
 
       function clearActive() {
@@ -229,12 +249,11 @@
         syncFilterCountry(countryName);
       }
 
-      // Навешиваем обработчики на страны
+      // Обработчики кликов и клавиш
       countryPaths.forEach(path => {
         const countryName = path.getAttribute('data-country') || '';
         if (!countryName) return;
 
-        // Доступность: навигация с клавиатуры
         path.setAttribute('tabindex', '0');
         path.setAttribute('role', 'button');
         path.setAttribute('aria-label', `Страна ${countryName}`);
@@ -257,14 +276,13 @@
         renderAllSystems();
         syncFilterCountry('');
 
-        // Сброс масштаба и центра (к виду "всё целиком")
         if (panZoomInstance) {
           panZoomInstance.resetZoom();
           panZoomInstance.center();
         }
       });
 
-      // Первичный список
+      // Стартовый список
       renderAllSystems();
       if (messageEl) {
         messageEl.textContent =
@@ -273,8 +291,7 @@
     }
 
     /**
-     * Пробуем сразу инициализировать, если SVG уже загружен
-     * (это как раз случай страницы с системами).
+     * Пробуем инициализировать сразу (если SVG уже загружен).
      */
     function tryImmediateInit() {
       try {
@@ -289,17 +306,15 @@
       return false;
     }
 
-    // Если не получилось сразу — ждём событие load
+    // Если не удалось сразу — ждём событие load
     if (!tryImmediateInit()) {
       mapObject.addEventListener('load', () => {
         try {
           const svgDoc = mapObject.contentDocument;
           if (svgDoc) {
             setupSvg(svgDoc);
-          } else {
-            if (messageEl) {
-              messageEl.textContent = 'Не удалось прочитать содержимое SVG-карты.';
-            }
+          } else if (messageEl) {
+            messageEl.textContent = 'Не удалось прочитать содержимое SVG-карты.';
             renderAllSystems();
           }
         } catch (error) {
@@ -313,7 +328,7 @@
       });
     }
 
-    // На случай, если SVG совсем не загрузился
+    // Если SVG совсем не загрузился
     mapObject.addEventListener('error', () => {
       if (messageEl) {
         messageEl.textContent =
@@ -323,6 +338,5 @@
     });
   }
 
-  // Экспортируем в глобальный объект
   window.initWorldMap = initWorldMap;
 })();
